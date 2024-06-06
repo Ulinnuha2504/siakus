@@ -1,0 +1,36 @@
+# Mengaktifkan penulisan ulang URL
+RewriteEngine On
+
+# Mengatur izin akses untuk semua file
+<FilesMatch ".*">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Membatasi akses ke file .htaccess untuk keamanan
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Menambah MIME types untuk PDF dan JPG/JPEG
+AddType application/pdf .pdf
+AddType image/jpeg .jpg .jpeg
+
+# Mengatur ukuran maksimal file yang bisa diunggah
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# Mengizinkan upload file dengan ekstensi tertentu
+<FilesMatch "\.(pdf|jpg|jpeg)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+
+# Menghapus Ekstensi
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]

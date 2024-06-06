@@ -1,0 +1,2 @@
+select * from penerimaan JOIN kategori_penerimaan on penerimaan.kpn_id=kategori_penerimaan.kpn_id JOIN siswa ON penerimaan.sw_kd=siswa.sw_kd join pengguna on penerimaan.pg_id=pengguna.pg_id;
+
